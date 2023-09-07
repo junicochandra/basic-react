@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Hello World</title>
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+
+    <!-- Don't use this in production: -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  </head>
+  
+  <body>
+    <div id="root"></div>
+    <script type="text/babel">    
+      const container = document.getElementById('root');
+      const root = ReactDOM.createRoot(container);
+
+      function Header({name}){
+        return (<h1>My name is react. Create by {name ? name : 'Chandra'}</h1>);
+      }
+
+      function Button(){
+        const [counter, setCounter] = React.useState(0);
+        const [txt, setTxt] = React.useState('');
+
+        function increment(){
+          setCounter(counter + 1);
+        }
+
+        function decrement(){
+          setCounter(counter - 1);
+        }
+
+        function reset(){
+          setCounter(0);
+        }
+
+        return (
+          <div>
+            <div>
+              <button onClick={decrement}>-</button>
+              <Result counter={counter}/> 
+              <button onClick={increment}>+</button>
+              <button style={{ margin:20, display:'block' }} onClick={reset}>Reset</button>  
+            </div>            
+          </div>
+        );
+      }
+
+      function Result({counter}){
+        return (<span style={{ margin:20 }}>{counter}</span>);
+      }
+
+      function HomePage(){
+        const students = ['junico', 'dwi', 'chandra'];
+        
+        return (
+          <div>
+            <Header name="Junico"/>
+            <Header/>
+            <hr/>
+            <h1>[Array]</h1>
+            <ul>
+              {
+                students.map((student) => (
+                  <li key={student}>{student}</li>
+                ))
+              }
+            </ul>
+            <hr/>
+            <h1>[State]</h1>
+            <Button/>
+          </div>
+        );
+      }
+
+      root.render(<HomePage />);
+    </script>
+  </body>
+</html>
